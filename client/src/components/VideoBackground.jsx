@@ -10,7 +10,7 @@ const VideoBackground = () => {
         muted
         playsInline
       />
-      <div className="absolute top-0 left-0 h-full w-full bg-black/20 z-1" />
+      <div className="absolute top-0 left-0 h-full w-full bg-black/35 z-1" />
     </>
   );
 };
