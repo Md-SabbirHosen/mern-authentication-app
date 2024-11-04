@@ -1,14 +1,17 @@
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Button } from "./ui/button";
 
 const SocialButtonsContainer = () => {
   return (
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid grid-cols-3 gap-2 mb-6">
       <Button variant="outline">
-        <FaGithub className="mr-2 h-4 w-4">Github</FaGithub>
+        <FaGoogle className=" h-4 w-4">Google</FaGoogle>
       </Button>
       <Button variant="outline">
-        <FaGoogle className="mr-2 h-4 w-4">Google</FaGoogle>
+        <FaFacebook className=" h-4 w-4">Facebook</FaFacebook>
+      </Button>
+      <Button variant="outline">
+        <FaGithub className=" h-4 w-4">Github</FaGithub>
       </Button>
     </div>
   );
