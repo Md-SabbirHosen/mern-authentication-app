@@ -35,7 +35,7 @@ const Login = () => {
           Sign In
         </Button>
         <div className="text-center ">
-          <Link to="/signup" className="text-sm font-semibold">
+          <Link to="/register" className="text-sm font-semibold">
             Create new account
           </Link>
         </div>

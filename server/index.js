@@ -9,9 +9,9 @@ app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
 
-const start = async () => {
+const start = () => {
   try {
-    await connectDB(process.env.MONGO_URI);
+    connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}....`);
     });
