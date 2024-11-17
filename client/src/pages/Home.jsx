@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <Card className="w-[320px] text-center">
       <CardHeader>
-        <img src={welcomeImage} className="h-64" alt="welcomeImage" />
+        <img src={welcomeImage} className="h-60" alt="welcomeImage" />
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-3xl font-bold text-[#1F41BB]">
+        <CardTitle className="text-2xl font-bold text-[#1F41BB]">
           Discover Your Dream Job here
         </CardTitle>
         <p className="text-xs mt-4 ">

@@ -18,9 +18,6 @@ const Login = () => {
         <CardTitle className="text-3xl font-bold text-[#1F41BB]">
           Create Account
         </CardTitle>
-        <p className="text-xs font-semibold">
-          Create an account so you can explore all the existing jobs
-        </p>
       </CardHeader>
       <CardContent className="grid gap-4 text-center">
         <FormField id="email" type="email" placeholder="Email" />

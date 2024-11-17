@@ -18,9 +18,6 @@ const Login = () => {
         <CardTitle className="text-3xl font-bold text-[#1F41BB]">
           Login Here
         </CardTitle>
-        <p className="text-xl font-semibold">
-          Welcome back you’ve been missed!
-        </p>
       </CardHeader>
       <CardContent className="grid gap-4 text-center">
         <FormField id="email" type="email" placeholder="Email" />
@@ -32,7 +29,7 @@ const Login = () => {
           </Link>
         </div>
         <Button className="w-full bg-[#1F41BB] text-xl font-medium">
-          Sign In
+          Sign in
         </Button>
         <div className="text-center ">
           <Link to="/register" className="text-sm font-semibold">

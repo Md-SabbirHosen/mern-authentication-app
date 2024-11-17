@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 const SocialButtonsContainer = () => {
   return (
-    <div className="grid grid-cols-3 gap-2 mb-6">
+    <div className="grid grid-cols-3 gap-2 mb-4">
       <Button variant="outline">
         <FaGoogle className=" h-4 w-4">Google</FaGoogle>
       </Button>
