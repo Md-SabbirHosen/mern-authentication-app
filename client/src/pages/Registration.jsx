@@ -9,27 +9,36 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
-const Registration = () => {
+const Login = () => {
   return (
     <Card className="w-[320px]">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Sign Up To Your Account</CardTitle>
+      <CardHeader className="space-y-1 text-center">
+        <CardTitle className="text-3xl font-bold text-[#1F41BB]">
+          Create Account
+        </CardTitle>
+        <p className="text-xs font-semibold">
+          Create an account so you can explore all the existing jobs
+        </p>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <FormField
-          id="email"
-          label="email"
-          type="email"
-          placeholder="example@gmail.com"
-        />
+      <CardContent className="grid gap-4 text-center">
+        <FormField id="email" type="email" placeholder="Email" />
+        <FormField id="password" type="password" placeholder="Password" />
         <FormField
           id="password"
-          label="password"
           type="password"
-          placeholder=""
+          placeholder="Confirm Password"
         />
-        <Button className="w-full">Sign Up</Button>
+
+        <Button className="w-full bg-[#1F41BB] text-xl font-medium">
+          Sign up
+        </Button>
+        <div className="text-center ">
+          <Link to="/login" className="text-sm font-semibold">
+            Already have an account
+          </Link>
+        </div>
         <Divider />
         <SocialButtonsContainer />
       </CardContent>
@@ -37,4 +46,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;

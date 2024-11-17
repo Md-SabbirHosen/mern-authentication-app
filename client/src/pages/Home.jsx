@@ -25,10 +25,10 @@ const Home = () => {
         </p>
       </CardContent>
       <CardFooter className="justify-between gap-2.5 mb-6">
-        <Button className="bg-[#1F41BB] w-full text-xl">
+        <Button className="bg-[#1F41BB] w-full text-xl hover:bg-black hover:text-white">
           <Link to="/login">Login</Link>
         </Button>
-        <Button className="text-xl text-black w-full bg-transparent">
+        <Button className="text-xl text-black w-full bg-transparent hover:bg-black hover:text-white">
           <Link to="/register">Register</Link>
         </Button>
       </CardFooter>
