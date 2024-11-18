@@ -13,9 +13,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <Card className="w-[320px]">
+    <Card className="w-[350px]">
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-3xl font-bold text-[#1F41BB]">
+        <CardTitle className="text-2xl font-bold text-[#1F41BB]">
           Create Account
         </CardTitle>
       </CardHeader>

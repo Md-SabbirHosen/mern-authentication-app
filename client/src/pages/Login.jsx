@@ -2,20 +2,14 @@ import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <Card className="w-[320px]">
+    <Card className="w-[350px]">
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-3xl font-bold text-[#1F41BB]">
+        <CardTitle className="text-2xl font-bold text-[#1F41BB]">
           Login Here
         </CardTitle>
       </CardHeader>
