@@ -1,14 +1,9 @@
 import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
+
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -20,12 +15,17 @@ const Login = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4 text-center">
-        <FormField id="email" type="email" placeholder="Email" />
-        <FormField id="password" type="password" placeholder="Password" />
+        <FormField
+          id="email"
+          type="email"
+          placeholder="Email Address"
+          icons="email"
+        />
         <FormField
           id="password"
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Password"
+          icons="password"
         />
 
         <Button className="w-full bg-[#1F41BB] text-xl font-medium">
