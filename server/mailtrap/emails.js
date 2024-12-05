@@ -3,21 +3,21 @@ import {
   PASSWORD_RESET_SUCCESS_TEMPLATE,
   VERIFICATION_EMAIL_TEMPLATE,
 } from "./emailTemplates.js";
-import { mailtrapClient, sender } from "./mailtrap.config.js";
+
+import { transporter } from "./mailtrap.config.js";
 
 export const sendVerificationEmail = async (email, verificationToken) => {
-  const recipient = [{ email }];
+  const recipient = email;
 
   try {
-    const response = await mailtrapClient.send({
-      from: sender,
+    const response = await transporter.sendMail({
+      from: '"Sabbir Hosen" <sabbirhosen17@cse.pstu.ac.bd>',
       to: recipient,
-      subject: "Verify your email",
+      subject: "Verify your email.",
       html: VERIFICATION_EMAIL_TEMPLATE.replace(
         "{verificationCode}",
         verificationToken
       ),
-      category: "Email Verification",
     });
 
     console.log("Email sent successfully", response);
