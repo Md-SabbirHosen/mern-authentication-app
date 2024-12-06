@@ -1,8 +1,8 @@
 import { User } from "../Models/UserSchema.js";
 import bcryptjs from "bcryptjs";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
-import { sendVerificationEmail } from "../mailtrap/emails.js";
-export const signup = async (req, res) => {
+import { sendVerificationEmail } from "../email/emails.js";
+export const signUp = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -46,5 +46,25 @@ export const signup = async (req, res) => {
     });
   }
 };
-export const login = async (req, res) => {};
-export const logout = async (req, res) => {};
+
+export const logIn = async (req, res) => {};
+export const logOut = async (req, res) => {};
+export const verifyEmail = async (req, res) => {
+  const { verificationToken } = req.body;
+  console.log(verificationToken);
+
+  try {
+    if (!verificationToken) throw new Error("verification token needed!");
+    const verifiedToken = await User.findOne({ verificationToken });
+
+    if (verifiedToken)
+      return res
+        .status(200)
+        .json({ success: "true", message: "token verified!" });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "email is not correct!",
+    });
+  }
+};
