@@ -29,17 +29,15 @@ export const sendVerificationEmail = async (email, verificationToken) => {
 };
 
 export const sendWelcomeEmail = async (email, name) => {
-  const recipient = [{ email }];
+  const recipient = email;
 
   try {
-    const response = await mailtrapClient.send({
-      from: sender,
+    const response = await transporter.sendMail({
+      from: '"Sabbir Hosen" <sabbirhosen17@cse.pstu.ac.bd>',
       to: recipient,
-      template_uuid: "e65925d1-a9d1-4a40-ae7c-d92b37d593df",
-      template_variables: {
-        company_info_name: "Auth Company",
-        name: name,
-      },
+      subject: "Welcome to Our Service!",
+      text: "Welcome to Our Service! We are glad to have you onboard.",
+      html: `<h1>Welcome!</h1><p>Thank you for joining our service. We hope you enjoy your experience!</p>`,
     });
 
     console.log("Welcome email sent successfully", response);

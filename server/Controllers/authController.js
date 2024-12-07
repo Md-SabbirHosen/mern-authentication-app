@@ -1,7 +1,8 @@
 import { User } from "../Models/UserSchema.js";
 import bcryptjs from "bcryptjs";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
-import { sendVerificationEmail } from "../email/emails.js";
+import { sendVerificationEmail, sendWelcomeEmail } from "../email/emails.js";
+
 export const signUp = async (req, res) => {
   const { email, password } = req.body;
 
@@ -49,22 +50,42 @@ export const signUp = async (req, res) => {
 
 export const logIn = async (req, res) => {};
 export const logOut = async (req, res) => {};
+
 export const verifyEmail = async (req, res) => {
   const { verificationToken } = req.body;
   console.log(verificationToken);
-
   try {
-    if (!verificationToken) throw new Error("verification token needed!");
-    const verifiedToken = await User.findOne({ verificationToken });
-
-    if (verifiedToken)
-      return res
-        .status(200)
-        .json({ success: "true", message: "token verified!" });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "email is not correct!",
+    const user = await User.findOne({
+      verificationToken: verificationToken,
+      verificationTokenExpiresAt: { $gt: Date.now() },
     });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired validation code!",
+      });
+    }
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+
+    const name = user.email.split("@")[0];
+    console.log(name);
+
+    await user.save();
+
+    await sendWelcomeEmail(user.email, name);
+
+    res.status(200).json({
+      success: true,
+      message: "Email verified successfully!",
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    console.log("error in verifyEmail ", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
