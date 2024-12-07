@@ -9,9 +9,9 @@ export const signUp = async (req, res) => {
   try {
     if (!email || !password) throw new Error("Email & Password are required!");
 
-    const userExists = await User.findOne({ email });
+    const userExist = await User.findOne({ email });
 
-    if (userExists)
+    if (userExist)
       return res
         .status(400)
         .json({ success: false, message: "User already exists!" });
@@ -21,35 +21,72 @@ export const signUp = async (req, res) => {
       100000 + Math.random() * 900000
     ).toString();
 
-    const user = new User({
+    const newUser = new User({
       email,
       password: hashedPassword,
       verificationToken,
       verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
     });
 
-    await user.save();
-    generateTokenAndSetCookie(res, user._id);
+    await newUser.save();
+    generateTokenAndSetCookie(res, newUser._id);
     await sendVerificationEmail(email, verificationToken);
 
     return res.status(201).json({
       success: true,
       message: "user created successfully!",
       user: {
-        ...user._doc,
+        ...newUser._doc,
         password: undefined,
       },
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Internal Server Error",
-    });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
-export const logIn = async (req, res) => {};
-export const logOut = async (req, res) => {};
+export const logIn = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const userExist = await User.findOne({ email });
+    if (!userExist) {
+      return res
+        .status(400)
+        .json({ success: "false", message: "Email is not valid" });
+    }
+    const isPasswordValid = await bcryptjs.compare(
+      password,
+      userExist.password
+    );
+    if (!isPasswordValid) {
+      return res
+        .status(400)
+        .json({ success: "false", message: "Password is not valid" });
+    }
+
+    generateTokenAndSetCookie(res, userExist._id);
+
+    userExist.lastLogin = new Date();
+    await userExist.save();
+
+    res.status(200).json({
+      success: "true",
+      message: "Logged in successfully",
+      user: {
+        ...userExist._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const logOut = async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ success: "true", message: "Logged out successfully" });
+};
 
 export const verifyEmail = async (req, res) => {
   const { verificationToken } = req.body;
@@ -85,7 +122,6 @@ export const verifyEmail = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log("error in verifyEmail ", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
