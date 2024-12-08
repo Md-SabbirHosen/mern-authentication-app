@@ -19,7 +19,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
     <p>Enter this code on the verification page to complete your registration.</p>
     <p>This code will expire in 15 minutes for security reasons.</p>
     <p>If you didn't create an account with us, please ignore this email.</p>
-    <p>Best regards,<br>Your Mern Auth Team</p>
+    <p>Best regards,<br>Mern Auth Team</p>
   </div>
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply to this email.</p>
@@ -50,7 +50,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
       <li>Reach out to our support team if you have any questions or need assistance.</li>
     </ul>
     <p>If you need any help, don’t hesitate to contact us. We’re here to support you every step of the way.</p>
-    <p>Cheers,<br>The Mern Auth Team</p>
+    <p>Cheers,<br>Mern Auth Team</p>
   </div>
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>You’re receiving this email because you signed up for Mern Auth. If this wasn’t you, please ignore this email.</p>
@@ -75,7 +75,7 @@ export const PASSWORD_RESET_SUCCESS_TEMPLATE = `
     <p>Hello,</p>
     <p>We're writing to confirm that your password has been successfully reset.</p>
     <div style="text-align: center; margin: 30px 0;">
-      <div style="background-color: #4CAF50; color: white; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; display: inline-block; font-size: 30px;">
+      <div style="background-color: #1F41BB; color: white; width: 50px; height: 50px; line-height: 50px; border-radius: 50%; display: inline-block; font-size: 30px;">
         ✓
       </div>
     </div>
@@ -87,7 +87,7 @@ export const PASSWORD_RESET_SUCCESS_TEMPLATE = `
       <li>Avoid using the same password across multiple sites</li>
     </ul>
     <p>Thank you for helping us keep your account secure.</p>
-    <p>Best regards,<br>Your Mern Auth Team</p>
+    <p>Best regards,<br>Mern Auth Team</p>
   </div>
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply to this email.</p>
@@ -116,7 +116,7 @@ export const PASSWORD_RESET_REQUEST_TEMPLATE = `
       <a href="{resetURL}" style="background-color: #1F41BB; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Reset Password</a>
     </div>
     <p>This link will expire in 1 hour for security reasons.</p>
-    <p>Best regards,<br>Your Mern Auth Team</p>
+    <p>Best regards,<br>Mern Auth Team</p>
   </div>
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply to this email.</p>

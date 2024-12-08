@@ -1,10 +1,12 @@
 import {
   PASSWORD_RESET_REQUEST_TEMPLATE,
+  PASSWORD_RESET_SUCCESS_TEMPLATE,
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
 } from "./emailTemplates.js";
 
 import { transporter } from "./emailConfig.js";
+import { response } from "express";
 
 export const sendVerificationEmail = async (email, verificationToken) => {
   const recipient = email;
@@ -61,4 +63,19 @@ export const sendPasswordResetEmail = async (email, resetURL) => {
   }
 };
 
-export const sendResetSuccessEmail = async (email) => {};
+export const sendResetSuccessEmail = async (email) => {
+  const recipient = email;
+
+  try {
+    const response = await transporter.sendMail({
+      from: `'Sabbir Hosen' ${process.env.SMTP_USER}`,
+      to: recipient,
+      subject: "Password reset successful",
+      html: PASSWORD_RESET_SUCCESS_TEMPLATE,
+    });
+    console.log("Passoword reset link send to your email!");
+  } catch (error) {
+    console.log("Error sending password reset link email!");
+    throw new Error(`Error sending password reset link email:${error}`);
+  }
+};
