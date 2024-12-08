@@ -1,6 +1,7 @@
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./db/connect.js";
-import dotenv from "dotenv";
 import authRoutes from "./Routes/authRoute.js";
 
 const app = express();
@@ -13,6 +14,8 @@ app.get("/", (req, res) => {
 
 //middlewares
 app.use(express.json());
+app.use(cookieParser());
+
 app.use("/api/v1/auth", authRoutes);
 
 const start = async () => {
