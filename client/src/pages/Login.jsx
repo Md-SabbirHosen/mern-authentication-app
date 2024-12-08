@@ -23,7 +23,10 @@ const Login = () => {
         />
 
         <div className="text-right">
-          <Link to="/signup" className="text-sm text-[#1F41BB] font-semibold">
+          <Link
+            to="/forgot-password"
+            className="text-sm text-[#1F41BB] font-semibold"
+          >
             Forgot your password?
           </Link>
         </div>

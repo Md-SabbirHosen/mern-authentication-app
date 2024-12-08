@@ -1,4 +1,5 @@
 import {
+  PASSWORD_RESET_REQUEST_TEMPLATE,
   VERIFICATION_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
 } from "./emailTemplates.js";
@@ -44,6 +45,20 @@ export const sendWelcomeEmail = async (email, name) => {
   }
 };
 
-export const sendPasswordResetEmail = async (email, resetURL) => {};
+export const sendPasswordResetEmail = async (email, resetURL) => {
+  const recipient = email;
+  try {
+    const response = await transporter.sendMail({
+      from: `'Sabbir Hosen' ${process.env.SMTP_USER}`,
+      to: recipient,
+      subject: "Password reset request email",
+      html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetURL),
+    });
+    console.log("Passoword reset link send to your email!");
+  } catch (error) {
+    console.log("Error sending password reset link email!");
+    throw new Error(`Error sending password reset link email:${error}`);
+  }
+};
 
 export const sendResetSuccessEmail = async (email) => {};
