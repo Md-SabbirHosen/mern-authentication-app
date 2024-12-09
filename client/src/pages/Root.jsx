@@ -4,19 +4,19 @@ import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
   return (
-    <div className="relative h-screen w-screen overflow-hidden  bg-[#1a2435]  ">
+    <div className="relative h-screen w-screen overflow-hidden grid place-items-center bg-[#292E49]  ">
       <div>
         <img
           src={bgGradient}
-          className="absolute w-4/5 top-0 left-0  opacity-20 z-0"
+          className="absolute w-4/5 top-0 left-0 blur-md  opacity-20 z-0"
           alt="bgGradients"
         />
       </div>
       <FloatingShape
-        color="bg-green-500"
+        color="bg-[#ACBB78]"
         size="w-64 h-64"
-        top="-5%"
-        left="10%"
+        top={"-5%"}
+        left={"10%"}
         delay={0}
       />
       <FloatingShape
@@ -33,7 +33,7 @@ const RootLayout = () => {
         left="-10%"
         delay={2}
       />
-      <div className="absolute inset-0 right-[15%]  flex items-center justify-end z-50  ">
+      <div className="absolute inset-0 flex justify-center items-center z-50">
         <Outlet />
       </div>
     </div>

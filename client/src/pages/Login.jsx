@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <Card className="w-[350px]">
+    <Card>
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold text-[#1F41BB]">
+        <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6]">
           Login Here
         </CardTitle>
       </CardHeader>
@@ -25,7 +25,7 @@ const Login = () => {
         <div className="text-right  ">
           <Link
             to="/forgot-password"
-            className="text-sm text-[#1F41BB] font-semibold"
+            className="text-sm text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6] font-semibold"
           >
             Forgot your password?
           </Link>

@@ -9,9 +9,9 @@ import {
 
 const Verification = () => {
   return (
-    <Card className="w-[350px]">
+    <Card>
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold text-[#1F41BB]">
+        <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6]">
           Verify Your Email
         </CardTitle>
         <p className="text-sm">Enter the 6-digit code sent to your email.</p>
@@ -30,9 +30,7 @@ const Verification = () => {
             <InputOTPSlot index={5} />
           </InputOTPGroup>
         </InputOTP>
-        <Button className="w-full bg-[#1F41BB] text-xl font-medium">
-          Verify Email
-        </Button>
+        <Button className="w-full  text-xl font-medium">Verify Email</Button>
       </CardContent>
     </Card>
   );
