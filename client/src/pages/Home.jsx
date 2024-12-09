@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <Card className=" text-center ">
-      <CardHeader className="px-8">
-        <img src={welcomeImage} className="h-60" alt="welcomeImage" />
+      <CardHeader className="px-8 flex justify-center items-center">
+        <img src={welcomeImage} className="h-60 w-60" alt="welcomeImage" />
       </CardHeader>
       <CardContent>
         <CardTitle className="text-2xl font-bold  text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6]">
