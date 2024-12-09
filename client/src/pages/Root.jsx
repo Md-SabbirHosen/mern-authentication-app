@@ -8,7 +8,7 @@ const RootLayout = () => {
       <div>
         <img
           src={bgGradient}
-          className="absolute w-4/5 top-0 left-0  opacity-20"
+          className="absolute w-4/5 top-0 left-0  opacity-20 z-0"
           alt="bgGradients"
         />
       </div>
@@ -33,7 +33,7 @@ const RootLayout = () => {
         left="-10%"
         delay={2}
       />
-      <div className=" absolute top-5 right-1/4 ">
+      <div className="absolute inset-0 right-[15%]  flex items-center justify-end z-50  ">
         <Outlet />
       </div>
     </div>

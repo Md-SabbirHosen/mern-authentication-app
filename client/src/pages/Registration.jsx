@@ -67,11 +67,11 @@ const Registration = () => {
         />
         <PasswordStrengthChecker />
 
-        <Button className="w-full bg-[#1F41BB] text-xl font-medium">
+        <Button className="w-full bg-[#1F41BB] text-xl font-medium z-50 ">
           Sign up
         </Button>
         <div className="text-center ">
-          <Link to="/login" className="text-sm font-semibold">
+          <Link to="/login" className="text-sm font-semibold z-50 ">
             Already have an account
           </Link>
         </div>

@@ -22,7 +22,7 @@ const Login = () => {
           icons="password"
         />
 
-        <div className="text-right">
+        <div className="text-right  ">
           <Link
             to="/forgot-password"
             className="text-sm text-[#1F41BB] font-semibold"
@@ -30,11 +30,11 @@ const Login = () => {
             Forgot your password?
           </Link>
         </div>
-        <Button className="w-full bg-[#1F41BB] text-xl font-medium">
+        <Button className="w-full bg-[#1F41BB] text-xl font-medium  ">
           Sign in
         </Button>
-        <div className="text-center ">
-          <Link to="/register" className="text-sm font-semibold">
+        <div className="text-center   ">
+          <Link to="/register" className="text-sm font-semibold  ">
             Create new account
           </Link>
         </div>
