@@ -2,6 +2,7 @@ import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
 import { RxCross2 } from "react-icons/rx";
+import { useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,6 +17,15 @@ const PASSWORD_CONSTRAINS = [
 ];
 
 const Registration = () => {
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const email = emailInputRef.current.value;
+    const password = passwordInputRef.current.value;
+  };
+
   const PasswordStrengthChecker = () => {
     return (
       <>
@@ -52,32 +62,36 @@ const Registration = () => {
           Create Account
         </CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-4 text-center">
-        <FormField
-          id="email"
-          type="email"
-          placeholder="Email Address"
-          icons="email"
-        />
-        <FormField
-          id="password"
-          type="password"
-          placeholder="Password"
-          icons="password"
-        />
-        <PasswordStrengthChecker />
+      <form onSubmit={submitHandler}>
+        <CardContent className="grid gap-4 text-center">
+          <FormField
+            id="email"
+            type="email"
+            placeholder="Email Address"
+            icons="email"
+            ref={emailInputRef}
+          />
+          <FormField
+            id="password"
+            type="password"
+            placeholder="Password"
+            icons="password"
+            ref={passwordInputRef}
+          />
+          <PasswordStrengthChecker />
+          <Button className="w-full bg-[#1F41BB] text-xl font-medium z-50 ">
+            Sign up
+          </Button>
 
-        <Button className="w-full bg-[#1F41BB] text-xl font-medium z-50 ">
-          Sign up
-        </Button>
-        <div className="text-center ">
-          <Link to="/login" className="text-sm font-semibold z-50 ">
-            Already have an account
-          </Link>
-        </div>
-        <Divider />
-        <SocialButtonsContainer />
-      </CardContent>
+          <div className="text-center ">
+            <Link to="/login" className="text-sm font-semibold z-50 ">
+              Already have an account
+            </Link>
+          </div>
+          <Divider />
+          <SocialButtonsContainer />
+        </CardContent>
+      </form>
     </Card>
   );
 };

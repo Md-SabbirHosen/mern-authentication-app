@@ -1,4 +1,5 @@
 import welcomeImage from "@/assets/welcome image.png";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,

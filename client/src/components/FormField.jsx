@@ -1,6 +1,6 @@
 import { Input } from "./ui/input";
-
-const FormField = ({ id, type, placeholder, icons }) => {
+import React from "react";
+const FormField = React.forwardRef(({ id, type, placeholder, icons }, ref) => {
   return (
     <div className="grid gap-2">
       <Input
@@ -9,9 +9,10 @@ const FormField = ({ id, type, placeholder, icons }) => {
         type={type}
         placeholder={placeholder}
         icons={icons}
+        ref={ref}
       />
     </div>
   );
-};
+});
 
 export default FormField;

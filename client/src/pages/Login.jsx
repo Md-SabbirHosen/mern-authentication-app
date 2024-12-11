@@ -1,4 +1,5 @@
 import Divider from "@/components/Divider";
+import { motion } from "framer-motion";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
 import { Button } from "@/components/ui/button";
@@ -30,9 +31,8 @@ const Login = () => {
             Forgot your password?
           </Link>
         </div>
-        <Button className="w-full bg-[#1F41BB] text-xl font-medium  ">
-          Sign in
-        </Button>
+        <Button className="w-full  text-xl font-medium  ">Sign in</Button>
+
         <div className="text-center   ">
           <Link to="/register" className="text-sm font-semibold  ">
             Create new account
