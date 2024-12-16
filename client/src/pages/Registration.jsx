@@ -34,10 +34,9 @@ const Registration = () => {
             Password Strength
           </p>
           <p className="col-span-2 text-sm justify-self-end">Very Weak</p>
-          <div className="h-[3px] w-full bg-[#626262]"></div>
-          <div className="h-[3px] w-full bg-[#626262]"></div>
-          <div className="h-[3px] w-full bg-[#626262]"></div>
-          <div className="h-[3px] w-full bg-[#626262]"></div>
+          {Array.from({ length: 4 }).map((index) => (
+            <div key={index} className="h-[3px] w-full bg-[#626262]"></div>
+          ))}
           <div className="col-span-4 ">
             {PASSWORD_CONSTRAINS.map((item) => {
               return (
