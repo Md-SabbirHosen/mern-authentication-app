@@ -1,12 +1,14 @@
 import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
-import { RxCross2 } from "react-icons/rx";
 import { useRef } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { signUp } from "@/reducers/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const PASSWORD_CONSTRAINS = [
   { id: Math.random(), value: "At least 6 characters" },
@@ -19,11 +21,19 @@ const PASSWORD_CONSTRAINS = [
 const Registration = () => {
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const submitHandler = (event) => {
     event.preventDefault();
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
+
+    dispatch(signUp({ email, password }));
+    navigate("/verify");
+
+    emailInputRef.current.value = "";
+    passwordInputRef.current.value = "";
   };
 
   const PasswordStrengthChecker = () => {
@@ -34,7 +44,7 @@ const Registration = () => {
             Password Strength
           </p>
           <p className="col-span-2 text-sm justify-self-end">Very Weak</p>
-          {Array.from({ length: 4 }).map((index) => (
+          {Array.from({ length: 4 }).map((_, index) => (
             <div key={index} className="h-[3px] w-full bg-[#626262]"></div>
           ))}
           <div className="col-span-4 ">
