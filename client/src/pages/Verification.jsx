@@ -6,8 +6,21 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { useState } from "react";
+import { verifyEmail } from "@/reducers/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Verification = () => {
+  const [otpValue, setOtpValue] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const verifyEmailHandler = () => {
+    dispatch(verifyEmail(otpValue));
+    navigate("/login");
+  };
+
   return (
     <Card>
       <CardHeader className="space-y-1 text-center">
@@ -17,20 +30,30 @@ const Verification = () => {
         <p className="text-sm">Enter the 6-digit code sent to your email.</p>
       </CardHeader>
       <CardContent className="flex flex-col justify-center items-center gap-6">
-        <InputOTP maxLength={6}>
+        <InputOTP
+          maxLength={6}
+          value={otpValue}
+          onChange={(value) => setOtpValue(value)}
+        >
           <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
+            {Array.from({ length: 3 }).map((_, index) => {
+              return <InputOTPSlot key={index} index={index} />;
+            })}
           </InputOTPGroup>
           <InputOTPSeparator className="mx-2" />
           <InputOTPGroup>
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
+            {Array.from({ length: 3 }).map((_, index) => {
+              const idx = index + 3;
+              return <InputOTPSlot key={idx} index={idx} />;
+            })}
           </InputOTPGroup>
         </InputOTP>
-        <Button className="w-full  text-xl font-medium">Verify Email</Button>
+        <Button
+          className="w-full  text-xl font-medium"
+          onClick={verifyEmailHandler}
+        >
+          Verify Email
+        </Button>
       </CardContent>
     </Card>
   );
