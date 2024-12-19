@@ -6,6 +6,7 @@ import RootLayout from "./pages/Root.jsx";
 import Verification from "./pages/Verification.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
+import Welcome from "./pages/Welcome.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/welcome",
+        element: <Welcome />,
       },
       {
         path: "/register",

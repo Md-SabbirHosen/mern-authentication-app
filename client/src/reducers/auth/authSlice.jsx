@@ -23,7 +23,7 @@ export const signUp = createAsyncThunk(
         password,
       });
       const data = response.data.user;
-      return data;
+      return { user: data.user, message: data.message };
     } catch (error) {
       const message = error.response?.data?.message || "Failed to sign up.";
       return rejectWithValue(message);
@@ -48,6 +48,37 @@ export const verifyEmail = createAsyncThunk(
   }
 );
 
+export const logIn = createAsyncThunk(
+  "auth/login",
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${API_URL}/login`, {
+        email,
+        password,
+      });
+      const data = response.data.user;
+      return { user: data.user, message: data.message };
+    } catch (error) {
+      const message = error.response?.data?.message || "Login failed!";
+      return rejectWithValue(message);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${API_URL}/logout`);
+      const data = response.data;
+      return data;
+    } catch (error) {
+      const message = "Error logging out!";
+      return rejectWithValue(message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -67,11 +98,13 @@ const authSlice = createSlice({
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.isAuthenticated = true;
         state.message = {
           type: "success",
-          text: "Account created successfully! Please verify your email.",
+          text:
+            action.payload.message ||
+            "Account created successfully! Please verify your email.",
         };
       })
       .addCase(signUp.rejected, (state, action) => {
@@ -102,6 +135,50 @@ const authSlice = createSlice({
         state.message = {
           type: "failed",
           text: action.payload,
+        };
+      });
+    builder
+      .addCase(logIn.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logIn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload.user;
+        state.isAuthenticated = true;
+        state.message = {
+          type: "success",
+          text: action.payload.message || "Login successfully!",
+        };
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.message = {
+          type: "failed",
+          text: action.payload,
+        };
+      });
+    builder
+      .addCase(logOut.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logOut.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+        state.message = {
+          type: "success",
+          text: action.payload.message,
+        };
+      })
+      .addCase(logOut.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.message = {
+          type: "failed",
+          text: action.payload.message,
         };
       });
   },

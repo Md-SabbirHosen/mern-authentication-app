@@ -6,7 +6,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { verifyEmail } from "@/reducers/auth/authSlice";
+import { clearMessage, verifyEmail } from "@/reducers/auth/authSlice";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,9 +24,10 @@ const Verification = () => {
       const toastType =
         message.type === "success" ? toast.success : toast.error;
       toastType(message.text);
-      // if (message.type === "success") {
-      //   navigate("/login");
-      // }
+      if (message.type === "success") {
+        navigate("/login");
+      }
+      dispatch(clearMessage());
     }
   }, [message, isLoading, navigate]);
 
