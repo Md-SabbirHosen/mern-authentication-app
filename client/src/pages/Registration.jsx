@@ -1,14 +1,15 @@
 import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { RxCross2 } from "react-icons/rx";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { signUp } from "@/reducers/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { clearMessage, signUp } from "@/reducers/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const PASSWORD_CONSTRAINS = [
   { id: Math.random(), value: "At least 6 characters" },
@@ -19,10 +20,24 @@ const PASSWORD_CONSTRAINS = [
 ];
 
 const Registration = () => {
+  const { message, isLoading } = useSelector((state) => state.auth);
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (message && !isLoading) {
+      if (Object.keys(message).length === 0) return;
+      const toastType =
+        message.type === "success" ? toast.success : toast.error;
+      toastType(message.text);
+      if (message.type === "success") {
+        navigate("/verify");
+      }
+      dispatch(clearMessage());
+    }
+  }, [message, isLoading, navigate]);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -30,7 +45,6 @@ const Registration = () => {
     const password = passwordInputRef.current.value;
 
     dispatch(signUp({ email, password }));
-    navigate("/verify");
 
     emailInputRef.current.value = "";
     passwordInputRef.current.value = "";

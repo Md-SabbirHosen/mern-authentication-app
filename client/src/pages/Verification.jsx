@@ -6,19 +6,32 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useState } from "react";
 import { verifyEmail } from "@/reducers/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Verification = () => {
   const [otpValue, setOtpValue] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { message, isLoading } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (message && !isLoading) {
+      if (Object.keys(message).length === 0) return;
+      const toastType =
+        message.type === "success" ? toast.success : toast.error;
+      toastType(message.text);
+      // if (message.type === "success") {
+      //   navigate("/login");
+      // }
+    }
+  }, [message, isLoading, navigate]);
 
   const verifyEmailHandler = () => {
     dispatch(verifyEmail(otpValue));
-    navigate("/login");
   };
 
   return (

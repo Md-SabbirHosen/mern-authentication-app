@@ -11,7 +11,7 @@ const initialState = {
   isLoading: false,
   isCheckingAuth: true,
   error: null,
-  message: null,
+  message: {},
 };
 
 export const signUp = createAsyncThunk(
@@ -25,7 +25,8 @@ export const signUp = createAsyncThunk(
       const data = response.data.user;
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message);
+      const message = error.response?.data?.message || "Failed to sign up.";
+      return rejectWithValue(message);
     }
   }
 );
@@ -40,7 +41,9 @@ export const verifyEmail = createAsyncThunk(
       const data = response.data.user;
       return data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message);
+      const message =
+        error.response?.data?.message || "Email verification failed!";
+      return rejectWithValue(message);
     }
   }
 );
@@ -66,10 +69,18 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.message = {
+          type: "success",
+          text: "Account created successfully! Please verify your email.",
+        };
       })
       .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+        state.message = {
+          type: "failed",
+          text: action.payload,
+        };
       });
     builder
       .addCase(verifyEmail.pending, (state) => {
@@ -80,12 +91,22 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.message = {
+          type: "success",
+          text: "Email verified successfully!",
+        };
       })
       .addCase(verifyEmail.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+        state.message = {
+          type: "failed",
+          text: action.payload,
+        };
       });
   },
 });
+
+export const { clearMessage } = authSlice.actions;
 
 export default authSlice.reducer;
