@@ -24,9 +24,12 @@ const ForgotPassword = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     const email = emailInputRef.current.value;
+
     dispatch(forgotPassword(email));
+
     emailInputRef.current.value = "";
   };
+
   return (
     <Card>
       <CardHeader className="space-y-1 text-center">
