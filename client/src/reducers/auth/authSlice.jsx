@@ -79,6 +79,24 @@ export const logOut = createAsyncThunk(
   }
 );
 
+export const forgotPassword = createAsyncThunk(
+  "auth/forgotPassword",
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${API_URL}/forgot-password`, {
+        email,
+      });
+      const data = response.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      const message =
+        error.response?.data?.message || "Password reset link failed to send!";
+      rejectWithValue(message);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -174,6 +192,26 @@ const authSlice = createSlice({
         };
       })
       .addCase(logOut.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.message = {
+          type: "failed",
+          text: action.payload.message,
+        };
+      });
+    builder
+      .addCase(forgotPassword.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.message = {
+          type: "success",
+          text: action.payload.message,
+        };
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
         state.message = {

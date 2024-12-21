@@ -1,8 +1,32 @@
 import FormField from "@/components/FormField";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { clearMessage, forgotPassword } from "@/reducers/auth/authSlice";
+import { useEffect, useRef } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const ForgotPassword = () => {
+  const { message, isLoading } = useSelector((state) => state.auth);
+  const emailInputRef = useRef(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (message && !isLoading) {
+      const toastType =
+        message.type === "success" ? toast.success : toast.error;
+      toastType(message.text);
+
+      dispatch(clearMessage());
+    }
+  }, [message, isLoading]);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const email = emailInputRef.current.value;
+    dispatch(forgotPassword(email));
+    emailInputRef.current.value = "";
+  };
   return (
     <Card>
       <CardHeader className="space-y-1 text-center">
@@ -14,18 +38,20 @@ const ForgotPassword = () => {
           password
         </p>
       </CardHeader>
-      <CardContent className="grid gap-4 text-center">
-        <FormField
-          id="email"
-          type="email"
-          placeholder="Email Address"
-          icons="email"
-        />
-
-        <Button className="w-full bg-[#1F41BB] text-xl font-medium">
-          Send Reset Link
-        </Button>
-      </CardContent>
+      <form onSubmit={submitHandler}>
+        <CardContent className="grid gap-4 text-center">
+          <FormField
+            id="email"
+            type="email"
+            placeholder="Email Address"
+            icons="email"
+            ref={emailInputRef}
+          />
+          <Button className="w-full bg-[#1F41BB] text-xl font-medium">
+            Send Reset Link
+          </Button>
+        </CardContent>
+      </form>
     </Card>
   );
 };
