@@ -9,9 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { clearMessage, logOut } from "@/reducers/auth/authSlice";
+import { clearMessage } from "@/reducers/auth/authSlice";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "@/reducers/auth/asyncThunk";
 
 const Welcome = () => {
   const { message, isLoading } = useSelector((state) => state.auth);

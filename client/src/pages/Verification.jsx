@@ -6,7 +6,8 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { clearMessage, verifyEmail } from "@/reducers/auth/authSlice";
+import { verifyEmail } from "@/reducers/auth/asyncThunk";
+import { clearMessage } from "@/reducers/auth/authSlice";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";

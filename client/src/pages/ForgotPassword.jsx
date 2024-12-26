@@ -1,7 +1,8 @@
 import FormField from "@/components/FormField";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { clearMessage, forgotPassword } from "@/reducers/auth/authSlice";
+import { forgotPassword } from "@/reducers/auth/asyncThunk";
+import { clearMessage } from "@/reducers/auth/authSlice";
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";

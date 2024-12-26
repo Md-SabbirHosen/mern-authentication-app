@@ -6,10 +6,11 @@ import { RxCross2 } from "react-icons/rx";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { clearMessage, signUp } from "@/reducers/auth/authSlice";
+import { clearMessage } from "@/reducers/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { signUp } from "@/reducers/auth/asyncThunk";
 
 const PASSWORD_CONSTRAINS = [
   { id: Math.random(), value: "At least 6 characters" },
