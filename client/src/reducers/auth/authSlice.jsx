@@ -17,6 +17,11 @@ const initialState = {
   message: {},
 };
 
+const handlePending = (state) => {
+  state.isLoading = true;
+  state.error = null;
+};
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -30,10 +35,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(signUp.pending, handlePending)
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
@@ -54,10 +56,7 @@ const authSlice = createSlice({
         };
       });
     builder
-      .addCase(verifyEmail.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(verifyEmail.pending, handlePending)
       .addCase(verifyEmail.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
@@ -76,10 +75,7 @@ const authSlice = createSlice({
         };
       });
     builder
-      .addCase(logIn.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
@@ -98,10 +94,7 @@ const authSlice = createSlice({
         };
       });
     builder
-      .addCase(logOut.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = null;
@@ -120,10 +113,7 @@ const authSlice = createSlice({
         };
       });
     builder
-      .addCase(forgotPassword.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(forgotPassword.pending, handlePending)
       .addCase(forgotPassword.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = {
@@ -140,10 +130,7 @@ const authSlice = createSlice({
         };
       });
     builder
-      .addCase(resetPassword.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
+      .addCase(resetPassword.pending, handlePending)
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = {
