@@ -17,7 +17,6 @@ const ForgotPassword = () => {
       const toastType =
         message.type === "success" ? toast.success : toast.error;
       toastType(message.text);
-
       dispatch(clearMessage());
     }
   }, [message, isLoading]);

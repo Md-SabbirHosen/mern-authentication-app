@@ -22,12 +22,12 @@ const handlePending = (state) => {
   state.error = null;
 };
 
-const handleRejected = (state, action, rejectedMessage) => {
+const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
   state.message = {
     type: "failed",
-    text: action.payload?.message || rejectedMessage,
+    text: action.payload,
   };
 };
 
@@ -57,12 +57,7 @@ const authSlice = createSlice({
         };
       })
       .addCase(signUp.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.message = {
-          type: "failed",
-          text: action.payload,
-        };
+        handleRejected(state, action);
       });
     builder
       .addCase(verifyEmail.pending, handlePending)
@@ -76,12 +71,7 @@ const authSlice = createSlice({
         };
       })
       .addCase(verifyEmail.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.message = {
-          type: "failed",
-          text: action.payload,
-        };
+        handleRejected(state, action);
       });
     builder
       .addCase(logIn.pending, handlePending)
