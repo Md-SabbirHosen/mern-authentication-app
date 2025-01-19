@@ -24,7 +24,7 @@ export const signUp = createAsyncThunk(
 
 export const verifyEmail = createAsyncThunk(
   "auth/verifyEmail",
-  async (otpCode, rejectWithValue) => {
+  async (otpCode, { rejectWithValue }) => {
     try {
       const response = await axios.post(`${API_URL}/verify-email`, {
         verificationToken: otpCode,
@@ -78,12 +78,11 @@ export const forgotPassword = createAsyncThunk(
         email,
       });
       const data = response.data;
-      console.log(data);
       return data;
     } catch (error) {
       const message =
         error.response?.data?.message || "Password reset link failed to send!";
-      rejectWithValue(message);
+      return rejectWithValue(message);
     }
   }
 );

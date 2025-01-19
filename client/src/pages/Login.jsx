@@ -1,5 +1,6 @@
 import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
+import Loading from "@/components/Loading";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,7 @@ import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { ScaleLoader } from "react-spinners";
 
 const Login = () => {
   const { message, isLoading } = useSelector((state) => state.auth);
@@ -39,6 +41,7 @@ const Login = () => {
 
   return (
     <Card>
+      <Loading isLoading={isLoading} />
       <CardHeader className="space-y-1 text-center">
         <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6]">
           Login Here

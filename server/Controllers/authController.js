@@ -96,7 +96,7 @@ export const logOut = async (req, res) => {
 
 export const verifyEmail = async (req, res) => {
   const { verificationToken } = req.body;
-  console.log(verificationToken);
+
   try {
     const user = await User.findOne({
       verificationToken: verificationToken,

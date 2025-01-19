@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { signUp } from "@/reducers/auth/asyncThunk";
+import Loading from "@/components/Loading";
 
 const PASSWORD_CONSTRAINS = [
   { id: Math.random(), value: "At least 6 characters" },
@@ -81,6 +82,7 @@ const Registration = () => {
   };
   return (
     <Card>
+      <Loading isLoading={isLoading} />
       <CardHeader className="space-y-1 text-center">
         <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6]">
           Create Account

@@ -1,4 +1,5 @@
 import FormField from "@/components/FormField";
+import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { forgotPassword } from "@/reducers/auth/asyncThunk";
@@ -32,6 +33,7 @@ const ForgotPassword = () => {
 
   return (
     <Card>
+      <Loading isLoading={isLoading} />
       <CardHeader className="space-y-1 text-center">
         <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#4776E6] via-[#8E54E9] to-[#4776E6]">
           Forgot Password

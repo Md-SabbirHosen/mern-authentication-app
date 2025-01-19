@@ -85,12 +85,7 @@ const authSlice = createSlice({
         };
       })
       .addCase(logIn.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.message = {
-          type: "failed",
-          text: action.payload,
-        };
+        handleRejected(state, action);
       });
     builder
       .addCase(logOut.pending, handlePending)
@@ -104,12 +99,7 @@ const authSlice = createSlice({
         };
       })
       .addCase(logOut.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.message = {
-          type: "failed",
-          text: action.payload.message,
-        };
+        handleRejected(state, action);
       });
     builder
       .addCase(forgotPassword.pending, handlePending)
@@ -121,12 +111,7 @@ const authSlice = createSlice({
         };
       })
       .addCase(forgotPassword.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.message = {
-          type: "failed",
-          text: action.payload.message,
-        };
+        handleRejected(state, action);
       });
     builder
       .addCase(resetPassword.pending, handlePending)
@@ -138,12 +123,7 @@ const authSlice = createSlice({
         };
       })
       .addCase(resetPassword.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        state.message = {
-          type: "failed",
-          text: action.payload.message,
-        };
+        handleRejected(state, action);
       });
   },
 });

@@ -1,6 +1,5 @@
 import welcomeImage from "@/assets/welcome-image.png";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,10 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { logOut } from "@/reducers/auth/asyncThunk";
 import { clearMessage } from "@/reducers/auth/authSlice";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "@/reducers/auth/asyncThunk";
+import { useNavigate } from "react-router-dom";
 
 const Welcome = () => {
   const { message, isLoading } = useSelector((state) => state.auth);
@@ -38,6 +39,7 @@ const Welcome = () => {
 
   return (
     <Card className=" text-center ">
+      <Loading isLoading={isLoading} />
       <CardHeader className=" flex justify-center items-center">
         <img src={welcomeImage} className="h-60 w-72" alt="Welcome" />
       </CardHeader>
