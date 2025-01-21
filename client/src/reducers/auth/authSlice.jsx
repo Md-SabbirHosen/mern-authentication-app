@@ -25,10 +25,7 @@ const handlePending = (state) => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
-  state.message = {
-    type: "failed",
-    text: action.payload,
-  };
+  state.message = action.payload;
 };
 
 const authSlice = createSlice({

@@ -50,7 +50,10 @@ export const logIn = createAsyncThunk(
       const data = response.data.user;
       return { user: data.user, message: data.message };
     } catch (error) {
-      const message = error.response?.data?.message || "Login failed!";
+      const message = {
+        type: error.response?.data?.success,
+        text: error.response?.data?.message || "Login failed!",
+      };
       return rejectWithValue(message);
     }
   }
