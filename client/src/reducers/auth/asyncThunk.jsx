@@ -16,7 +16,10 @@ export const signUp = createAsyncThunk(
       const data = response.data.user;
       return { user: data.user, message: data.message };
     } catch (error) {
-      const message = error.response?.data?.message || "Failed to sign up.";
+      const message = {
+        type: error.response?.data?.success,
+        text: error.response?.data?.message || "Signup failed!",
+      };
       return rejectWithValue(message);
     }
   }
@@ -32,8 +35,10 @@ export const verifyEmail = createAsyncThunk(
       const data = response.data.user;
       return data;
     } catch (error) {
-      const message =
-        error.response?.data?.message || "Email verification failed!";
+      const message = {
+        type: error.response?.data?.success,
+        text: error.response?.data?.message || "Email verification failed!",
+      };
       return rejectWithValue(message);
     }
   }
@@ -83,8 +88,10 @@ export const forgotPassword = createAsyncThunk(
       const data = response.data;
       return data;
     } catch (error) {
-      const message =
-        error.response?.data?.message || "Password reset link failed to send!";
+      const message = {
+        type: error.response?.data?.success,
+        text: error.response?.data?.message || "An error occured!",
+      };
       return rejectWithValue(message);
     }
   }
@@ -101,9 +108,13 @@ export const resetPassword = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
-      const message =
-        error.response?.data?.message || "Password reset link failed to send!";
-      rejectWithValue(message);
+      const message = {
+        type: error.response?.data?.success,
+        text:
+          error.response?.data?.message ||
+          "Password reset link failed to send!",
+      };
+      return rejectWithValue(message);
     }
   }
 );

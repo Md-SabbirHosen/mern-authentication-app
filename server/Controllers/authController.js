@@ -173,6 +173,11 @@ export const resetPassword = async (req, res) => {
       resetPasswordToken: token,
       resetPasswordExpiresAt: { $gt: Date.now() },
     });
+    if (!password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No Password found!" });
+    }
     if (!user) {
       return res
         .status(400)

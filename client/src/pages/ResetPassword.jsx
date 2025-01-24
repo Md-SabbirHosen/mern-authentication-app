@@ -40,6 +40,8 @@ const ResetPassword = () => {
 
     if (newPassword === confirmNewPassword) {
       password = newPassword;
+    } else {
+      toast.error("Passwords do not match!");
     }
 
     dispatch(resetPassword({ password, token }));
