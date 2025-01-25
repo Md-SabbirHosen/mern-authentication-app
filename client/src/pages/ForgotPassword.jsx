@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (message && !isLoading) {
+    if (message?.type && message?.text && !isLoading) {
       const toastType =
         message.type === "success" ? toast.success : toast.error;
       toastType(message.text);

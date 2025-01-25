@@ -31,20 +31,27 @@ const ResetPassword = () => {
     }
   }, [message, isLoading]);
 
+  const validatePassword = (newPassword, confirmNewPassword) => {
+    if (newPassword !== confirmNewPassword) {
+      toast.error("Passwords do not match!");
+      return false;
+    }
+    if (newPassword.length < 6) {
+      toast.error("Password must be at least 6 characters!");
+      return false;
+    }
+    return true;
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     const token = params.id;
     const newPassword = passwordInputRef.current.value;
     const confirmNewPassword = confirmPasswordInputRef.current.value;
-    let password;
 
-    if (newPassword === confirmNewPassword) {
-      password = newPassword;
-    } else {
-      toast.error("Passwords do not match!");
-    }
+    if (!validatePassword(newPassword, confirmNewPassword)) return;
 
-    dispatch(resetPassword({ password, token }));
+    dispatch(resetPassword({ newPassword, token }));
 
     passwordInputRef.current.value = "";
     confirmPasswordInputRef.current.value = "";
