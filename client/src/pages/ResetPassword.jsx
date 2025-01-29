@@ -8,6 +8,7 @@ import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import PasswordStrengthChecker from "@/components/PasswordStrengthChecker";
 
 const ResetPassword = () => {
   const { message, isLoading } = useSelector((state) => state.auth);
@@ -80,7 +81,7 @@ const ResetPassword = () => {
             icons="password"
             ref={confirmPasswordInputRef}
           />
-
+          <PasswordStrengthChecker />
           <Button className="w-full bg-[#1F41BB] text-xl font-medium">
             Send New Password
           </Button>
