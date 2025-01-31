@@ -32,6 +32,10 @@ const Registration = () => {
     }
   }, [message, isLoading, navigate]);
 
+  const passwordInputHandler = (event) => {
+    console.log(event);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     const email = emailInputRef.current.value;
@@ -65,6 +69,7 @@ const Registration = () => {
             type="password"
             placeholder="Password"
             icons="password"
+            onPasswordChangeHandler={passwordInputHandler}
             ref={passwordInputRef}
           />
           <PasswordStrengthChecker />
