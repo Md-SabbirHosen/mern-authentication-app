@@ -1,13 +1,51 @@
 import { RxCross2 } from "react-icons/rx";
-const PASSWORD_CONSTRAINS = [
-  { id: Math.random(), value: "At least 6 characters" },
-  { id: Math.random(), value: "Contains uppercase letter" },
-  { id: Math.random(), value: "Contains lowercase letter" },
-  { id: Math.random(), value: "Contains a number" },
-  { id: Math.random(), value: "Contains speacial character" },
-];
+import { FaCheck } from "react-icons/fa6";
 
-const PasswordStrengthChecker = () => {
+const PasswordCriteria = ({ password }) => {
+  const PASSWORD_CONSTRAINS = [
+    {
+      id: Math.random(),
+      label: "At least 6 characters",
+      met: password.length >= 6,
+    },
+    {
+      id: Math.random(),
+      label: "Contains uppercase letter",
+      met: /[A-Z]/.test(password),
+    },
+    {
+      id: Math.random(),
+      label: "Contains lowercase letter",
+      met: /[a-z]/.test(password),
+    },
+    { id: Math.random(), label: "Contains a number", met: /\d/.test(password) },
+    {
+      id: Math.random(),
+      label: "Contains speacial character",
+      met: /[^A-Za-z0-9]/.test(password),
+    },
+  ];
+
+  return (
+    <>
+      {PASSWORD_CONSTRAINS.map((item) => {
+        return (
+          <p
+            className={`text-start text-sm font-medium flex gap-1 items-center transition ${
+              !item.met ? "text-[#c31432]" : "text-[#11998e]"
+            }`}
+            key={item.id}
+          >
+            {item.met ? <FaCheck /> : <RxCross2 />}
+            {item.label}
+          </p>
+        );
+      })}
+    </>
+  );
+};
+
+const PasswordStrengthChecker = ({ password }) => {
   return (
     <>
       <div className="grid gap-2 grid-cols-4 ">
@@ -19,17 +57,7 @@ const PasswordStrengthChecker = () => {
           <div key={index} className="h-[3px] w-full bg-[#626262]"></div>
         ))}
         <div className="col-span-4 ">
-          {PASSWORD_CONSTRAINS.map((item) => {
-            return (
-              <p
-                className="text-start text-sm flex gap-1 items-center"
-                key={item.id}
-              >
-                <RxCross2 className="text-[#626262]" />
-                {item.value}
-              </p>
-            );
-          })}
+          <PasswordCriteria password={password} />
         </div>
       </div>
     </>

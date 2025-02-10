@@ -1,7 +1,7 @@
 import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
 import SocialButtonsContainer from "@/components/SocialButtonsContainer";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import PasswordStrengthChecker from "@/components/PasswordStrengthChecker";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,8 +14,8 @@ import Loading from "@/components/Loading";
 
 const Registration = () => {
   const { message, isLoading } = useSelector((state) => state.auth);
-  const emailInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,19 +32,21 @@ const Registration = () => {
     }
   }, [message, isLoading, navigate]);
 
-  const passwordInputHandler = (event) => {
-    console.log(event);
+  const emailChangeHandler = (email) => {
+    setEmail(email);
+  };
+
+  const passwordChangeHandler = (password) => {
+    setPassword(password);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const email = emailInputRef.current.value;
-    const password = passwordInputRef.current.value;
 
     dispatch(signUp({ email, password }));
 
-    emailInputRef.current.value = "";
-    passwordInputRef.current.value = "";
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -62,17 +64,18 @@ const Registration = () => {
             type="email"
             placeholder="Email Address"
             icons="email"
-            ref={emailInputRef}
+            onEmailChangeHandler={emailChangeHandler}
           />
           <FormField
             id="password"
             type="password"
             placeholder="Password"
             icons="password"
-            onPasswordChangeHandler={passwordInputHandler}
-            ref={passwordInputRef}
+            onPasswordChangelHandler={passwordChangeHandler}
           />
-          <PasswordStrengthChecker />
+
+          <PasswordStrengthChecker password={password} />
+
           <Button className="w-full bg-[#1F41BB] text-xl font-medium z-50 ">
             Sign up
           </Button>
