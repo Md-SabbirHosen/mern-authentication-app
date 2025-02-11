@@ -16,6 +16,7 @@ const Registration = () => {
   const { message, isLoading } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordIsValid, setPasswordIsValid] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -40,10 +41,20 @@ const Registration = () => {
     setPassword(password);
   };
 
+  const passwordIsValidationHandler = (strength) => {
+    if (strength === 100) setPasswordIsValid(true);
+    else setPasswordIsValid(false);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
-    dispatch(signUp({ email, password }));
+    console.log(password);
+    if (passwordIsValid) {
+      dispatch(signUp({ email, password }));
+    } else {
+      toast.error(" Password must meet all criteria");
+    }
 
     setEmail("");
     setPassword("");
@@ -74,7 +85,10 @@ const Registration = () => {
             onPasswordChangelHandler={passwordChangeHandler}
           />
 
-          <PasswordStrengthChecker password={password} />
+          <PasswordStrengthChecker
+            password={password}
+            onPasswordIsValidHandler={passwordIsValidationHandler}
+          />
 
           <Button className="w-full bg-[#1F41BB] text-xl font-medium z-50 ">
             Sign up
