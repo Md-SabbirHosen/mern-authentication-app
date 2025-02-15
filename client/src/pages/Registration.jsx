@@ -1,16 +1,16 @@
 import Divider from "@/components/Divider";
 import FormField from "@/components/FormField";
-import SocialButtonsContainer from "@/components/SocialButtonsContainer";
-import { useEffect, useState } from "react";
+import Loading from "@/components/Loading";
 import PasswordStrengthChecker from "@/components/PasswordStrengthChecker";
+import SocialButtonsContainer from "@/components/SocialButtonsContainer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { signUp } from "@/reducers/auth/asyncThunk";
 import { clearMessage } from "@/reducers/auth/authSlice";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import { signUp } from "@/reducers/auth/asyncThunk";
-import Loading from "@/components/Loading";
 
 const Registration = () => {
   const { message, isLoading } = useSelector((state) => state.auth);
@@ -90,7 +90,10 @@ const Registration = () => {
             onPasswordIsValidHandler={passwordIsValidationHandler}
           />
 
-          <Button className="w-full bg-[#1F41BB] text-xl font-medium z-50 ">
+          <Button
+            type="submit"
+            className="w-full bg-[#1F41BB] text-xl font-medium z-50 "
+          >
             Sign up
           </Button>
 
