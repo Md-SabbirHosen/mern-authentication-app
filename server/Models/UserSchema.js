@@ -5,7 +5,14 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.googleId;
+      },
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
     },
     lastLogin: {
       type: Date,

@@ -68,8 +68,8 @@ const Registration = () => {
           Create Account
         </CardTitle>
       </CardHeader>
-      <form onSubmit={submitHandler}>
-        <CardContent className="grid gap-4 text-center">
+      <CardContent className="grid gap-4 text-center">
+        <form className="flex flex-col gap-4" onSubmit={submitHandler}>
           <FormField
             id="email"
             type="email"
@@ -102,10 +102,10 @@ const Registration = () => {
               Already have an account
             </Link>
           </div>
-          <Divider />
-          <SocialButtonsContainer />
-        </CardContent>
-      </form>
+        </form>
+        <Divider />
+        <SocialButtonsContainer />
+      </CardContent>
     </Card>
   );
 };

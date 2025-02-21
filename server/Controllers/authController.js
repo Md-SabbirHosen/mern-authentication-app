@@ -10,9 +10,26 @@ import { User } from "../Models/UserSchema.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 
 export const signUp = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, googleId } = req.body;
 
   try {
+    if (googleId) {
+      try {
+        const user = new User({
+          email,
+          googleId,
+          isVerified: true,
+        });
+        await user.save();
+        return res
+          .status(201)
+          .json({ success: true, message: "user created successfully!" });
+      } catch (error) {
+        console.log(error);
+        return res.status(500).json({ success: false, message: error.message });
+      }
+    }
+
     if (!email || !password) throw new Error("Email & Password are required!");
 
     const userExist = await User.findOne({ email });
